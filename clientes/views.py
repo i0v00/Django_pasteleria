@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
 from .models import Cliente
 from .forms import ClienteForm
 
@@ -31,5 +32,5 @@ def eliminar_cliente(request, id):
     cliente = get_object_or_404(Cliente, id=id)
     if request.method == 'POST':
         cliente.delete()
-        return redirect('lista_clientes')
-    return render(request, 'clientes/confirmar_eliminar.html', {'cliente': cliente})
+        messages.success(request, 'Cliente eliminado correctamente.')
+    return redirect('lista_clientes')
